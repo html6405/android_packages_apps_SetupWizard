@@ -42,6 +42,7 @@ public class SimMissingActivity extends BaseSetupWizardActivity {
         if (!mPhoneMonitor.simMissing()) {
             finishAction(RESULT_OK);
         }
+        setNextText(R.string.skip);
         final int simLocation = getResources().getInteger(
                 R.integer.sim_image_type);
         ImageView simLogo = ((ImageView) findViewById(R.id.sim_slot_image));
@@ -59,21 +60,12 @@ public class SimMissingActivity extends BaseSetupWizardActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        SetupWizardUtils.enableComponent(this, ChooseDataSimActivity.class);
-        SetupWizardUtils.enableComponent(this, MobileDataActivity.class);
-    }
-
-    @Override
     public void onNavigateNext() {
         if (mPhoneMonitor.simMissing()) {
-            SetupWizardUtils.disableComponent(this, ChooseDataSimActivity.class);
-            SetupWizardUtils.disableComponent(this, MobileDataActivity.class);
-        } else if (!mPhoneMonitor.isMultiSimDevice() || mPhoneMonitor.singleSimInserted()) {
-            SetupWizardUtils.disableComponent(this, ChooseDataSimActivity.class);
+            nextAction(ResultCodes.RESULT_SKIP);
+        } else {
+            super.onNavigateNext();
         }
-        super.onNavigateNext();
     }
 
     @Override

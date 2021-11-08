@@ -300,10 +300,11 @@ public class SetupWizardUtils {
             disableComponent(context, MobileDataActivity.class);
             disableComponent(context, SimMissingActivity.class);
             disableComponent(context, ChooseDataSimActivity.class);
-        } else if (!simMissing()) {
-            disableComponent(context, SimMissingActivity.class);
         }
         if (!isMultiSimDevice() || singleSimInserted()) {
+            disableComponent(context, ChooseDataSimActivity.class);
+        } else if (simMissing()) {
+            disableComponent(context, MobileDataActivity.class);
             disableComponent(context, ChooseDataSimActivity.class);
         }
         if (!hasWifi(context) || isEthernetConnected(context)) {
