@@ -270,9 +270,7 @@ public class SetupWizardUtils {
         if (!hasLeanback(context) || isBluetoothDisabled()) {
             disableComponent(context, BluetoothSetupActivity.class);
         }
-        if (!hasBiometric(context)) {
-            disableComponent(context, BiometricActivity.class);
-        }
+        disableComponent(context, BiometricActivity.class);
         if (!hasTelephony(context) || !simMissing()) {
             disableComponent(context, SimMissingActivity.class);
         }
